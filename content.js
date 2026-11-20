@@ -68,6 +68,16 @@
     btn.style.cssText = "background:#fff;color:#1a73e8;border:none;padding:8px 12px;border-radius:6px;font-weight:600;cursor:pointer;font-size:13px;";
     panel.appendChild(btn);
 
+    const restoreBtn = document.createElement("button");
+    restoreBtn.style.cssText = "background:transparent;color:#e8f0fe;border:1px solid rgba(255,255,255,0.5);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;display:none;";
+    restoreBtn.textContent = "恢复桌面环境";
+    restoreBtn.onclick = async () => {
+      await chrome.runtime.sendMessage({ action: "setSpoof", enabled: false });
+      restoreBtn.style.display = "none";
+      statusEl.textContent = "✅ 已恢复原生环境，请刷新页面后重试验证";
+    };
+    panel.appendChild(restoreBtn);
+
     if (mode === "cloud") {
       statusEl.textContent = "第一步：点击右上角终端图标 [>_] 唤出 Verify 弹窗，或点下方按钮自动唤起";
       btn.textContent = "1. 自动点击 Cloud Shell 终端图标";
@@ -95,6 +105,12 @@
     }
 
     (document.body || document.documentElement).appendChild(panel);
+
+    chrome.runtime.sendMessage({ action: "getState" }).then(state => {
+      if (state && state.spoofEnabled) {
+        restoreBtn.style.display = "block";
+      }
+    }).catch(() => {});
   }
 
   function ensurePanel() {
