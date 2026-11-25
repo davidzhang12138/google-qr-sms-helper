@@ -56,7 +56,7 @@
 
     const title = document.createElement("div");
     title.style.cssText = "font-weight:600;font-size:14px;display:flex;justify-content:space-between;align-items:center;";
-    title.textContent = "⚡ Google 验证降级助手 v1.1.0.1";
+    title.textContent = "⚡ Google 验证降级助手 v1.1.0.2";
     panel.appendChild(title);
     makeDraggable(panel, title);
 

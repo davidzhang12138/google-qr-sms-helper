@@ -2,11 +2,13 @@
 
 将 Google 桌面端强制跨设备扫码验证（`/v3/signin/challenge/iap/qrcode`）降级回传统短信验证码流程的 Chrome MV3 插件。
 
-当前版本：`v1.2.0.1`（上游 `v1.2.0` + fork 修订 1）
+当前版本：`v1.1.0.2`（上游 `v1.1.0` + fork 修订 2）
 
-本仓库是 [havenicec/google-qr-sms-helper](https://github.com/havenicec/google-qr-sms-helper) 的维护分支，已合并上游 PR [#13](https://github.com/havenicec/google-qr-sms-helper/pull/13)（仅在降级链路内临时伪装移动端 UA）。上游仍使用其原始版本；本仓库使用四段版本号 `<上游版本>.<fork 修订号>`，例如 `v1.2.0.1`。
+本仓库是 [havenicec/google-qr-sms-helper](https://github.com/havenicec/google-qr-sms-helper) 的维护分支，已合并上游 PR [#13](https://github.com/havenicec/google-qr-sms-helper/pull/13)（仅在降级链路内临时伪装移动端 UA；该 PR 尚未合入上游主线）。上游仍使用其原始版本；本仓库使用四段版本号 `<上游版本>.<fork 修订号>`，例如 `v1.1.0.2`。
 
-## 相对官方 v1.2.0 的改动
+## 相对官方 v1.1.0 的改动
+
+### Fork 自有改动
 
 - **面板重挂载**：Google 登录页是 SPA，导航或重渲染会移除插件面板。现在每秒检查并重新挂载，支持从 `confirmidentifier` 直接跳到 `qrcode` 的流程。
 - **新 TL 参数兼容**：官方只识别旧的 `ADG-` 前缀；现在依次兼容 `ds:0` 数据、`devicephoneverification/begin` URL 的 `plt` 参数和旧版 `ADG-` 回退。
@@ -14,7 +16,7 @@
 - **面板可拖动**：拖动标题栏即可移动面板，和 Ant Browser 的账号/密码快捷输入工具条并存。
 - **面板位置**：默认底部留出 84px，避免和快捷输入工具条重叠。
 
-## 上游 v1.2.0 的变化（PR #13）
+### 合并的上游 PR #13（尚未合入上游主线）
 
 - **按需启用伪装**：`declarativeNetRequest` 的 UA 规则默认关闭，只在点击「一键降级」时临时开启；降级失败自动回滚。
 - **收窄生效范围**：只覆盖 `uplevelingstep/*`、`/_/IdvUplevelingUi/*`（提交验证码接口）和 `devicephoneverification/*`。
@@ -29,14 +31,14 @@
 在「插件管理」中使用以下 Release 资源地址安装：
 
 ```text
-https://github.com/davidzhang12138/google-qr-sms-helper/releases/download/v1.2.0.1/google-qr-sms-helper-v1.2.0.1.zip
+https://github.com/davidzhang12138/google-qr-sms-helper/releases/download/v1.1.0.2/google-qr-sms-helper-v1.1.0.2.zip
 ```
 
-后续版本只需把版本号替换为新的 `v1.2.0.N`。
+后续版本只需把版本号替换为新的 `v1.1.0.N`。
 
 ### Chrome / Edge 手动加载
 
-1. 下载 Release 中的 `google-qr-sms-helper-v1.2.0.1.zip` 并解压。
+1. 下载 Release 中的 `google-qr-sms-helper-v1.1.0.2.zip` 并解压。
 2. 打开 `chrome://extensions/`，开启开发者模式。
 3. 点击「加载已解压的扩展程序」，选择解压后的目录。
 
@@ -57,8 +59,8 @@ https://github.com/davidzhang12138/google-qr-sms-helper/releases/download/v1.2.0
 
 ## 版本规则
 
-- Release tag 使用 `v<上游版本>.<fork 修订号>`，例如 `v1.2.0.1`、`v1.2.0.2`。
-- `manifest.json` 的 `version` 同步使用四段版本号（Chrome 支持 `1.2.0.1`）。
+- Release tag 使用 `v<上游版本>.<fork 修订号>`，例如 `v1.1.0.2`、`v1.1.0.3`。
+- `manifest.json` 的 `version` 同步使用四段版本号（Chrome 支持 `1.1.0.2`）。
 - 上游发布新版本后，先合并上游改动，再把 fork 修订号重置为 `.1`。
 
 ## 已知限制
