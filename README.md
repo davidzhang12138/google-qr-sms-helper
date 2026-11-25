@@ -21,7 +21,7 @@
 在「插件管理」中使用以下 Release 资源地址安装：
 
 ```text
-https://github.com/davidzhang12138/google-qr-sms-helper-fork/releases/download/v1.1.0.1/google-qr-sms-helper-v1.1.0.1.zip
+https://github.com/davidzhang12138/google-qr-sms-helper/releases/download/v1.1.0.1/google-qr-sms-helper-v1.1.0.1.zip
 ```
 
 后续版本只需把版本号替换为新的 `v1.1.0.N`。
