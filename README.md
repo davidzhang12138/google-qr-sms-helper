@@ -47,7 +47,8 @@ https://github.com/davidzhang12138/google-qr-sms-helper/releases/download/v1.1.0
 
 ## 已知限制
 
-- consent 页面的 UUID 提取仍依赖 Google 当前页面结构；如果 Google 再次改版，降级可能停在「未能从 consent 页面提取到 UUID」。
+- 降级链路已在全新流程上验证可跳转到短信验证页；Google 仍可能因短时间内多次尝试返回「Too many failed attempts」，这属于服务端风控，不是插件错误。
+- consent 页面结构再次变化时仍可能需要适配。
 - 本仓库与上游作者无隶属关系；问题请提交到本仓库 Issues。
 
 ## License
