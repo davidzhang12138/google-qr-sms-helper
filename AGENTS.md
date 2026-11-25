@@ -24,5 +24,6 @@ gh release create v1.1.0.1 google-qr-sms-helper-v1.1.0.1.zip \
   --notes-file CHANGELOG.md
 ```
 
+- 推送 `v*` tag 后，`.github/workflows/release.yml` 会自动校验 `manifest.json` 版本号、打包 zip 并创建 Release；上面的 `zip` / `gh release create` 命令仅用于本地手动发布。
 - 上游发布新版本后：先合并上游改动，再把 fork 修订号重置为 `.1`，重新执行上面的发布流程。
 - 本仓库不自动更新；Ant Browser 的固定直链安装/更新使用 Release 资源地址。

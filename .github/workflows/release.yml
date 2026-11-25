@@ -1,0 +1,22 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify version matches tag
+        run: test "$(node -p "require('./manifest.json').version")" = "${GITHUB_REF_NAME#v}"
+      - name: Build zip
+        run: zip -r "google-qr-sms-helper-${GITHUB_REF_NAME}.zip" manifest.json background.js content.js ua_spoof.js LICENSE README.md
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create "$GITHUB_REF_NAME" "google-qr-sms-helper-${GITHUB_REF_NAME}.zip" --title "$GITHUB_REF_NAME" --notes-file CHANGELOG.md
